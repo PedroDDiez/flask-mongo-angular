@@ -8,7 +8,7 @@ Along with this list, the app also has an input box where the user can type a wo
 To start working on it, you can clone the repository locally and follow the steps below.
 
 ```
-git clone https://github.com/PedroDDiez/flask-postgis-test.git <project-name>
+git clone https://github.com/PedroDDiez/flask-mongo-angular.git <project-name>
 ```
 
 ## Requirements
