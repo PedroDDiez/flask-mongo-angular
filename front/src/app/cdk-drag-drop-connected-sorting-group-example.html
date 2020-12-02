@@ -1,0 +1,16 @@
+<div cdkDropListGroup>
+  <div class="example-container">
+    <h2>Wordlist</h2>
+
+    <div cdkDropList [cdkDropListData]="word" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" [class.bold]="currentAnagram.anagrams.includes(item)" *ngFor="let item of word" cdkDrag>{{item}}</div>
+    </div>
+    <app-anagrams [anagram]="currentAnagram"></app-anagrams>
+  </div>
+
+</div>
+
+
+<!-- 
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

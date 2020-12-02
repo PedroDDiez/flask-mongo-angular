@@ -1,0 +1,39 @@
+version: '3'
+services:
+  # From https://github.com/tiangolo/uwsgi-nginx-flask-docker
+  back:
+    build: 
+      context: .
+      dockerfile: ./dockerfiles/back/Dockerfile
+    volumes:
+      - ./back:/app
+    ports:
+      - "8000:80"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
+      - 'RUN=flask run --host=0.0.0.0 --port=80'
+      - 'MONGODB_URI=mongodb://mongo/keywords'
+    depends_on:
+      - mongo
+    # command: flask run --host=0.0.0.0 --port=80
+    # Infinite loop, to keep it alive, for debugging
+    # command: bash -c "while true; do echo 'sleeping...' && sleep 10; done"
+
+  front:
+    build: 
+      context: .
+      dockerfile: ./dockerfiles/front/Dockerfile
+    ports:
+      - '80:80'
+  mongo:
+    image: slyn/mongodb
+    restart: always
+    volumes:
+      - mongo_data:/home
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+volumes:
+  mongo_data:
